@@ -21,7 +21,7 @@ let scanTimeline = null;
 
 logoutButton.addEventListener("click", () => {
   localStorage.removeItem("token");
-  window.location.assign("login.html");
+  window.location.assign("index.html");
 });
 
 function setApiStatus(state, message) {
