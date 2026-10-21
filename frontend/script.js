@@ -3,6 +3,7 @@
 const API_BASE = (window.CYBERSHIELD_API_BASE || "").replace(/\/$/, "");
 const menuToggle = document.getElementById("menu-toggle");
 const mobileScrim = document.getElementById("mobile-scrim");
+const logoutButton = document.getElementById("logout-button");
 const apiStatus = document.getElementById("api-status");
 const scanForm = document.getElementById("scan-form");
 const scanInput = document.getElementById("scan-input");
@@ -17,6 +18,11 @@ const activityList = document.getElementById("activity-list");
 const timelineCanvas = document.getElementById("scan-timeline");
 const timelineNote = document.getElementById("timeline-note");
 let scanTimeline = null;
+
+logoutButton.addEventListener("click", () => {
+  localStorage.removeItem("token");
+  window.location.assign("login.html");
+});
 
 function setApiStatus(state, message) {
   apiStatus.classList.remove("connected", "error");

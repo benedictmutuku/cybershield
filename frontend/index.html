@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if (!localStorage.getItem("token")) {
+        window.location.replace("login.html");
+      }
+    </script>
     <meta
       name="description"
       content="PhishShield AI helps you assess suspicious links and messages."
@@ -77,6 +82,9 @@
             <div class="topbar-date" id="today-label"></div>
             <button class="icon-button refresh-button" id="refresh-button" type="button" aria-label="Refresh dashboard" title="Refresh dashboard">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5" /><path d="M5.6 9a7 7 0 0 1 11.8-2L20 12M4 12l2.6 5a7 7 0 0 0 11.8-2" /></svg>
+            </button>
+            <button class="icon-button logout-button" id="logout-button" type="button" aria-label="Log out" title="Log out">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3" /><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" /></svg>
             </button>
           </div>
         </header>
