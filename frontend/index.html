@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PhishShield AI helps you assess suspicious links and messages."
+    />
+    <meta name="theme-color" content="#080d18" />
+    <title>PhishShield AI | Threat Intelligence Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#dashboard" aria-label="PhishShield AI dashboard">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 3.5 27 8v7.7c0 6.2-4.4 10.8-11 13.3C9.4 26.5 5 21.9 5 15.7V8l11-4.5Z" stroke="currentColor" stroke-width="2" />
+              <path d="m11.5 16.1 3 3 6-6.2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+          </span>
+          <span class="brand-copy">
+            <strong>PhishShield <span>AI</span></strong>
+            <small>THREAT INTELLIGENCE</small>
+          </span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+        <nav class="side-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#dashboard" data-nav="dashboard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" /><rect x="13" y="3" width="8" height="5" rx="2" /><rect x="13" y="10" width="8" height="11" rx="2" /><rect x="3" y="13" width="8" height="8" rx="2" /></svg>
+            <span>Dashboard</span>
+          </a>
+          <a class="nav-link" href="#scan" data-nav="scan">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4.5 4.5M8 10.8h5.6M10.8 8v5.6" /></svg>
+            <span>Scan</span>
+            <span class="nav-count">NEW</span>
+          </a>
+          <a class="nav-link" href="#history" data-nav="history">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.2-5.7L3.5 8.5" /><path d="M3.5 4.5v4h4M12 7.5V12l3 2" /></svg>
+            <span>History</span>
+          </a>
+          <a class="nav-link" href="#about" data-nav="about">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 8h.01" /></svg>
+            <span>About</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-tip">
+          <span class="tip-orb" aria-hidden="true"></span>
+          <div>
+            <strong>Stay one step ahead</strong>
+            <p>Pause before you click. Scan before you trust.</p>
+          </div>
+        </div>
+        <div class="sidebar-footer">
+          <span class="avatar">PS</span>
+          <span class="profile-copy"><strong>Security analyst</strong><small>Local workspace</small></span>
+          <span class="online-dot" title="Workspace ready"></span>
+        </div>
+      </aside>
+
+      <main class="main-content" id="dashboard">
+        <header class="topbar">
+          <button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+          <div class="breadcrumb"><span>Workspace</span><span class="crumb-separator">/</span><strong id="current-page">Dashboard</strong></div>
+          <div class="topbar-actions">
+            <div class="api-status" id="api-status"><span class="status-dot"></span><span>Loading stats</span></div>
+            <span class="topbar-divider"></span>
+            <div class="topbar-date" id="today-label"></div>
+            <button class="icon-button refresh-button" id="refresh-button" type="button" aria-label="Refresh dashboard" title="Refresh dashboard">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5" /><path d="M5.6 9a7 7 0 0 1 11.8-2L20 12M4 12l2.6 5a7 7 0 0 0 11.8-2" /></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="content-wrap">
+          <section class="welcome-row">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-line"></span> SECURITY OVERVIEW</div>
+              <h1>Your security <span>at a glance.</span></h1>
+              <p class="welcome-copy">Monitor suspicious activity and check links or messages before they put you at risk.</p>
+            </div>
+            <a class="button button-primary welcome-action" href="#scan">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4.5 4.5M10.8 8v5.6M8 10.8h5.6" /></svg>
+              New scan
+            </a>
+          </section>
+
+          <section class="stats-grid" aria-label="Security statistics">
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-icon icon-blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M5 8h14M5 16h14" /></svg></span><span class="stat-caption">ALL-TIME</span></div>
+              <div class="stat-value" id="stat-total">—</div>
+              <div class="stat-label">Total scans</div>
+              <div class="stat-foot"><span class="foot-dot blue"></span>URLs and messages analyzed</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-icon icon-red"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3.8 18h16.4L12 3Z" /><path d="M12 9v4M12 16h.01" /></svg></span><span class="stat-caption">HIGH RISK</span></div>
+              <div class="stat-value" id="stat-phishing">—</div>
+              <div class="stat-label">Phishing detected</div>
+              <div class="stat-foot"><span class="foot-dot red"></span>Requires extra caution</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-icon icon-amber"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg></span><span class="stat-caption">REVIEW</span></div>
+              <div class="stat-value" id="stat-suspicious">—</div>
+              <div class="stat-label">Suspicious</div>
+              <div class="stat-foot"><span class="foot-dot amber"></span>Worth a closer look</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-icon icon-green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 20 7v5.5c0 4.5-3.1 7.7-8 9.5-4.9-1.8-8-5-8-9.5V7l8-3.5Z" /><path d="m8.5 12 2.2 2.2 4.8-5" /></svg></span><span class="stat-caption">LOW RISK</span></div>
+              <div class="stat-value" id="stat-safe">—</div>
+              <div class="stat-label">Safe</div>
+              <div class="stat-foot"><span class="foot-dot green"></span>No obvious risk indicators</div>
+            </article>
+          </section>
+
+          <section class="dashboard-grid">
+            <article class="panel scan-panel" id="scan">
+              <div class="panel-heading">
+                <div>
+                  <div class="panel-kicker"><span class="live-pulse"></span> THREAT CHECK</div>
+                  <h2>Scan suspicious content</h2>
+                  <p>Paste a URL or message to get a quick risk assessment.</p>
+                </div>
+                <span class="panel-shield" aria-hidden="true">
+                  <svg viewBox="0 0 56 56" fill="none"><path d="M28 5 47 13v13.3c0 10.7-7.6 18.7-19 23-11.4-4.3-19-12.3-19-23V13l19-8Z" stroke="currentColor" stroke-width="2" /><path d="m20 27.5 5.3 5.3L36.5 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" /></svg>
+                </span>
+              </div>
+
+              <form id="scan-form">
+                <div class="input-mode" role="group" aria-label="Content type">
+                  <button class="mode-button active" type="button" data-input-type="url" aria-pressed="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1" /><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1" /></svg>
+                    URL
+                  </button>
+                  <button class="mode-button" type="button" data-input-type="message" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v11H9l-5 3v-14Z" /><path d="M8 9h8M8 13h5" /></svg>
+                    Message
+                  </button>
+                </div>
+
+                <label class="input-label" for="scan-input" id="scan-input-label">URL TO CHECK</label>
+                <div class="scan-input-wrap">
+                  <svg class="input-leading-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1" /><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1" /></svg>
+                  <textarea id="scan-input" name="input_text" rows="1" placeholder="https://example.com/login" required></textarea>
+                  <button class="clear-input" id="clear-input" type="button" aria-label="Clear input">×</button>
+                </div>
+                <div class="input-hint" id="input-hint">Enter the full link including https:// for the most accurate scan.</div>
+                <button class="button button-primary scan-submit" id="scan-submit" type="submit">
+                  <span class="submit-label">Scan</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1" /><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1" /></svg>
+                  <span class="button-spinner" aria-hidden="true"></span>
+                </button>
+              </form>
+
+              <div class="scan-result" id="scan-result" role="status" aria-live="polite" hidden></div>
+              <div class="scan-privacy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 1 1 8 0v3M12 14v3" /></svg>Submitted content is sent to the API for assessment.</div>
+            </article>
+
+            <article class="panel activity-panel">
+              <div class="section-heading">
+                <div>
+                  <div class="panel-kicker">RECENT ACTIVITY</div>
+                  <h2>Latest scans</h2>
+                </div>
+                <a class="text-link" href="#history">View all <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="activity-list" id="activity-list">
+                <div class="empty-state"><span class="empty-icon">⌁</span><strong>Loading scan history</strong><span>Recent scans will appear here.</span></div>
+              </div>
+              <div class="activity-footer"><span class="foot-dot blue"></span>Latest scans from your workspace</div>
+            </article>
+          </section>
+
+          <section class="lower-grid">
+            <article class="panel timeline-panel">
+              <div class="section-heading">
+                <div>
+                  <div class="panel-kicker">SCAN TIMELINE</div>
+                  <h2>Risk scores over time</h2>
+                </div>
+                <span class="subtle-tag">LATEST 10 SCANS</span>
+              </div>
+              <div class="timeline-chart-wrap">
+                <canvas id="scan-timeline" role="img" aria-label="Bar chart showing risk scores for recent scans over time"></canvas>
+              </div>
+              <p class="chart-note" id="timeline-note">Loading recent scans...</p>
+            </article>
+
+            <article class="panel guidance-panel">
+              <div class="guidance-art" aria-hidden="true">
+                <span class="guidance-ring ring-one"></span><span class="guidance-ring ring-two"></span>
+                <span class="guidance-shield"><svg viewBox="0 0 56 56" fill="none"><path d="M28 5 47 13v13.3c0 10.7-7.6 18.7-19 23-11.4-4.3-19-12.3-19-23V13l19-8Z" stroke="currentColor" stroke-width="2" /><path d="m20 27.5 5.3 5.3L36.5 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" /></svg></span>
+              </div>
+              <div class="guidance-copy">
+                <div class="panel-kicker">SECURITY REMINDER</div>
+                <h2>Think before you click.</h2>
+                <p>Unexpected urgency, odd sender addresses, and unfamiliar links deserve a closer look.</p>
+                <a href="#about" class="text-link">Learn about PhishShield <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          </section>
+
+          <section class="panel history-panel" id="history">
+            <div class="section-heading">
+              <div>
+                <div class="panel-kicker">LATEST API RESULTS</div>
+                <h2>Recent Threats</h2>
+              </div>
+              <span class="subtle-tag" id="recent-count">LATEST 10</span>
+            </div>
+            <div class="table-scroll">
+              <table class="history-table">
+                <thead><tr><th>INPUT</th><th>SCORE</th><th>STATUS</th><th>SCANNED</th></tr></thead>
+                <tbody id="recent-body"><tr><td colspan="4" class="table-empty">Loading recent threats...</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="about-panel" id="about">
+            <div class="about-icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3.5 27 8v7.7c0 6.2-4.4 10.8-11 13.3C9.4 26.5 5 21.9 5 15.7V8l11-4.5Z" stroke="currentColor" stroke-width="2" /><path d="m11.5 16.1 3 3 6-6.2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /></svg></div>
+            <div><div class="panel-kicker">ABOUT PHISHSHIELD AI</div><p>A cybersecurity project that helps assess suspicious URLs and messages with simple, explainable risk indicators. Results are guidance—not a guarantee of safety.</p></div>
+            <span class="version-tag">PROJECT PREVIEW</span>
+          </section>
+
+          <footer class="page-footer">
+            <span>© <span id="year"></span> PhishShield AI <span class="footer-separator">·</span> Built for safer clicks.</span>
+            <span class="footer-status"><i class="foot-dot blue"></i>Dashboard data synced with API</span>
+          </footer>
+        </div>
+      </main>
+    </div>
+    <div class="scan-warning" id="scan-warning" role="alert" aria-live="assertive" hidden>
+      <span class="warning-icon" aria-hidden="true">!</span>
+      <span class="warning-copy"><strong>High risk detected</strong><span id="warning-message"></span></span>
+      <button class="warning-dismiss" id="warning-dismiss" type="button" aria-label="Dismiss warning">×</button>
+    </div>
+    <div class="mobile-scrim" id="mobile-scrim"></div>
+  </body>
+</html>
